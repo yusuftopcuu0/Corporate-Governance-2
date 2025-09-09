@@ -6,6 +6,7 @@ import Tasks from "./pages/Tasks";
 import Chat from "./pages/Chat";
 import Settings from "./pages/Settings";
 import Layout from "./components/Layout";
+import LiveChat from "./pages/LiveChat";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/employees" element={<Employees />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/live-chat" element={<LiveChat />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>

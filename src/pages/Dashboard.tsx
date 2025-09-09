@@ -1,8 +1,8 @@
-import { Button, Card, CardContent, Grid, Typography } from "@mui/material";
+import { Card, CardContent, Grid, Typography } from "@mui/material";
 import { useAuthStore } from "../store/useAuthStore";
 
 export default function Dashboard() {
-  const { role, logout } = useAuthStore();
+  const { role } = useAuthStore();
 
   const renderContent = () => {
     switch (role) {
@@ -97,10 +97,6 @@ export default function Dashboard() {
         Dashboard
       </Typography>
       {renderContent()}
-
-      <Button variant="outlined" color="error" sx={{ mt: 4 }} onClick={logout}>
-        Çıkış Yap
-      </Button>
     </div>
   );
 }
