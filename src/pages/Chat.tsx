@@ -103,7 +103,7 @@ const Chat = () => {
         ]),
       ];
     }
-    return ["Yönetici"]; // Çalışan sadece yöneticisini görsün
+    return [...new Set([...employees.map((e) => e.name), "Tüm Kullanıcılar"])];
   }, [role, employees]);
 
   // Set first user as selected on initial load

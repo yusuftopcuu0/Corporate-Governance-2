@@ -16,7 +16,7 @@ import {
   MenuItem,
   Select,
   FormControl,
-  InputLabel
+  InputLabel,
 } from "@mui/material";
 import { useAuthStore } from "../store/useAuthStore";
 import { useEmployeeStore } from "../store/useEmployeeStore";
@@ -25,11 +25,11 @@ import { deepPurple, green, blue, orange, red } from "@mui/material/colors";
 
 // Departman renkleri
 const departmentColors: { [key: string]: string } = {
-  'IT': blue[500],
-  'İK': green[500],
-  'Finans': deepPurple[500],
-  'Pazarlama': orange[500],
-  'Satış': red[500],
+  IT: blue[500],
+  İK: green[500],
+  Finans: deepPurple[500],
+  Pazarlama: orange[500],
+  Satış: red[500],
 };
 
 // Rastgele avatar rengi üretme
@@ -45,9 +45,9 @@ const stringToColor = (string: string) => {
 // Avatar bileşeni
 const EmployeeAvatar = ({ name }: { name: string }) => {
   const initials = name
-    .split(' ')
-    .map(part => part[0])
-    .join('')
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
     .toUpperCase();
 
   return (
@@ -56,8 +56,8 @@ const EmployeeAvatar = ({ name }: { name: string }) => {
         bgcolor: stringToColor(name),
         width: 56,
         height: 56,
-        fontSize: '1.25rem',
-        fontWeight: 'bold',
+        fontSize: "1.25rem",
+        fontWeight: "bold",
       }}
     >
       {initials}
@@ -74,13 +74,16 @@ export default function Employees() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
 
-  const departments = [...new Set(employees.map(emp => emp.department))];
+  const departments = [...new Set(employees.map((emp) => emp.department))];
 
-  const filteredEmployees = employees.filter(emp => {
-    const matchesSearch = emp.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesDepartment = !selectedDepartment || emp.department === selectedDepartment;
-    
-    if (role === "yönetici") {
+  const filteredEmployees = employees.filter((emp) => {
+    const matchesSearch = emp.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesDepartment =
+      !selectedDepartment || emp.department === selectedDepartment;
+
+    if (role === "yonetici") {
       return matchesSearch && matchesDepartment && emp.department === "IT";
     } else if (role === "calisan") {
       return matchesSearch && matchesDepartment && emp.name === "Yusuf";
@@ -90,10 +93,12 @@ export default function Employees() {
 
   const handleAdd = () => {
     if (name.trim() === "" || department.trim() === "") return;
-    addEmployee({ 
-      name, 
-      role: "calisan", 
-      department
+    addEmployee({
+      name,
+      role: "calisan",
+      department,
+      projects: 0,
+      tasks: 0,
     });
     setName("");
     setDepartment("");
@@ -105,7 +110,12 @@ export default function Employees() {
 
   return (
     <Box p={3}>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={4}
+      >
         <Box>
           <Typography variant="h4" fontWeight="bold" gutterBottom>
             Çalışan Yönetimi
@@ -115,17 +125,17 @@ export default function Employees() {
           </Typography>
         </Box>
         {role === "sahip" && (
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             startIcon={<Add />}
             onClick={handleAdd}
-            sx={{ 
+            sx={{
               borderRadius: 5,
               px: 3,
               py: 1,
-              textTransform: 'none',
-              fontWeight: 'bold',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+              textTransform: "none",
+              fontWeight: "bold",
+              boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
             }}
           >
             Yeni Çalışan Ekle
@@ -150,17 +160,21 @@ export default function Employees() {
                       <Search color="action" />
                     </InputAdornment>
                   ),
-                  sx: { borderRadius: 3 }
+                  sx: { borderRadius: 3 },
                 }}
               />
             </Grid>
             <Grid item xs={12} md={5}>
               <FormControl fullWidth>
-                <InputLabel id="department-filter-label">Departman Filtrele</InputLabel>
+                <InputLabel id="department-filter-label">
+                  Departman Filtrele
+                </InputLabel>
                 <Select
                   labelId="department-filter-label"
                   value={selectedDepartment}
-                  onChange={(e) => setSelectedDepartment(e.target.value as string)}
+                  onChange={(e) =>
+                    setSelectedDepartment(e.target.value as string)
+                  }
                   label="Departman Filtrele"
                   sx={{ borderRadius: 3 }}
                 >
@@ -195,18 +209,18 @@ export default function Employees() {
       <Grid container spacing={3}>
         {filteredEmployees.map((emp) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={emp.id}>
-            <Card 
-              sx={{ 
-                borderRadius: 3, 
+            <Card
+              sx={{
+                borderRadius: 3,
                 boxShadow: 4,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                transition: 'transform 0.3s, box-shadow 0.3s',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: 6
-                }
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                transition: "transform 0.3s, box-shadow 0.3s",
+                "&:hover": {
+                  transform: "translateY(-5px)",
+                  boxShadow: 6,
+                },
               }}
             >
               <CardContent sx={{ flex: 1, p: 3 }}>
@@ -223,21 +237,21 @@ export default function Employees() {
                 </Box>
 
                 <Box mb={2}>
-                  <Chip 
-                    label={emp.department || 'Belirtilmemiş'} 
-                    size="small" 
-                    sx={{ 
+                  <Chip
+                    label={emp.department || "Belirtilmemiş"}
+                    size="small"
+                    sx={{
                       bgcolor: `${getDepartmentColor(emp.department)}15`,
                       color: getDepartmentColor(emp.department),
-                      fontWeight: 'bold',
-                      mb: 1
-                    }} 
+                      fontWeight: "bold",
+                      mb: 1,
+                    }}
                   />
-                  <Chip 
-                    label={emp.role === 'yönetici' ? 'Yönetici' : 'Çalışan'} 
-                    size="small" 
-                    variant="outlined" 
-                    sx={{ ml: 1, fontWeight: 'medium' }} 
+                  <Chip
+                    label={emp.role === "yönetici" ? "Yönetici" : "Çalışan"}
+                    size="small"
+                    variant="outlined"
+                    sx={{ ml: 1, fontWeight: "medium" }}
                   />
                 </Box>
 
@@ -250,18 +264,18 @@ export default function Employees() {
                       {emp.projects || 0}
                     </Typography>
                   </Box>
-                  <LinearProgress 
-                    variant="determinate" 
-                    value={Math.min(100, (emp.projects || 0) * 10)} 
-                    sx={{ 
-                      height: 6, 
+                  <LinearProgress
+                    variant="determinate"
+                    value={Math.min(100, (emp.projects || 0) * 10)}
+                    sx={{
+                      height: 6,
                       borderRadius: 3,
                       mb: 1.5,
-                      '& .MuiLinearProgress-bar': {
-                        bgcolor: 'primary.main',
-                        borderRadius: 3
-                      }
-                    }} 
+                      "& .MuiLinearProgress-bar": {
+                        bgcolor: "primary.main",
+                        borderRadius: 3,
+                      },
+                    }}
                   />
 
                   <Box display="flex" justifyContent="space-between" mb={0.5}>
@@ -272,34 +286,38 @@ export default function Employees() {
                       {emp.tasks || 0}
                     </Typography>
                   </Box>
-                  <LinearProgress 
-                    variant="determinate" 
-                    value={Math.min(100, (emp.tasks || 0) * 5)} 
-                    sx={{ 
-                      height: 6, 
+                  <LinearProgress
+                    variant="determinate"
+                    value={Math.min(100, (emp.tasks || 0) * 5)}
+                    sx={{
+                      height: 6,
                       borderRadius: 3,
-                      '& .MuiLinearProgress-bar': {
-                        bgcolor: 'secondary.main',
-                        borderRadius: 3
-                      }
-                    }} 
+                      "& .MuiLinearProgress-bar": {
+                        bgcolor: "secondary.main",
+                        borderRadius: 3,
+                      },
+                    }}
                   />
                 </Box>
 
                 <Divider sx={{ my: 2 }} />
 
-                <Box display="flex" justifyContent="space-between" alignItems="center">
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
                   <Typography variant="caption" color="text.secondary">
-                    {emp.role === 'yönetici' ? 'Yönetici' : 'Çalışan'}
+                    {emp.role === "yönetici" ? "Yönetici" : "Çalışan"}
                   </Typography>
                   {role === "sahip" ? (
                     <Box>
                       <IconButton size="small" color="primary">
                         <Edit fontSize="small" />
                       </IconButton>
-                      <IconButton 
-                        size="small" 
-                        color="error" 
+                      <IconButton
+                        size="small"
+                        color="error"
                         onClick={() => removeEmployee(emp.id)}
                       >
                         <Delete fontSize="small" />
@@ -369,7 +387,7 @@ export default function Employees() {
                 variant="contained"
                 onClick={handleAdd}
                 disabled={!name.trim() || !department.trim()}
-                sx={{ borderRadius: 3, minWidth: 'unset' }}
+                sx={{ borderRadius: 3, minWidth: "unset" }}
               >
                 <Add />
               </Button>

@@ -43,26 +43,26 @@ import { useSettingsStore } from "../store/settingsStore";
 
 // Settings sections
 const SETTINGS_SECTIONS = [
-  { id: 'profile', label: 'Profil', icon: <PersonIcon /> },
-  { id: 'appearance', label: 'Görünüm', icon: <PaletteIcon /> },
-  { id: 'language', label: 'Dil', icon: <LanguageIcon /> },
-  { id: 'notifications', label: 'Bildirimler', icon: <NotificationsIcon /> },
-  { id: 'security', label: 'Güvenlik', icon: <SecurityIcon /> },
+  { id: "profile", label: "Profil", icon: <PersonIcon /> },
+  { id: "appearance", label: "Görünüm", icon: <PaletteIcon /> },
+  { id: "language", label: "Dil", icon: <LanguageIcon /> },
+  { id: "notifications", label: "Bildirimler", icon: <NotificationsIcon /> },
+  { id: "security", label: "Güvenlik", icon: <SecurityIcon /> },
 ];
 
 const Settings = () => {
   const theme = useTheme();
-  const { 
-    theme: currentTheme, 
-    language, 
-    name, 
-    email, 
-    setTheme, 
-    setLanguage, 
-    updateProfile 
+  const {
+    theme: currentTheme,
+    language,
+    name,
+    email,
+    setTheme,
+    setLanguage,
+    updateProfile,
   } = useSettingsStore();
 
-  const [activeSection, setActiveSection] = useState('profile');
+  const [activeSection, setActiveSection] = useState("profile");
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({ name, email });
   const [notifications, setNotifications] = useState({
@@ -70,79 +70,83 @@ const Settings = () => {
     push: true,
     sound: false,
   });
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
+  const [saveStatus, setSaveStatus] = useState<
+    "idle" | "saving" | "success" | "error"
+  >("idle");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSave = async () => {
     try {
-      setSaveStatus('saving');
+      setSaveStatus("saving");
       await updateProfile(formData.name, formData.email);
-      setSaveStatus('success');
+      setSaveStatus("success");
       setIsEditing(false);
-      
+
       // Reset success message after 3 seconds
       setTimeout(() => {
-        setSaveStatus('idle');
+        setSaveStatus("idle");
       }, 3000);
     } catch (err) {
-      console.error('Error saving profile:', err);
-      setSaveStatus('error');
+      console.error("Error saving profile:", err);
+      setSaveStatus("error");
     }
   };
 
   const handleNotificationToggle = (setting: string) => {
-    setNotifications(prev => ({
+    setNotifications((prev) => ({
       ...prev,
-      [setting]: !prev[setting as keyof typeof prev]
+      [setting]: !prev[setting as keyof typeof prev],
     }));
   };
 
   const renderSection = () => {
     switch (activeSection) {
-      case 'profile':
+      case "profile":
         return (
           <Card variant="outlined" sx={{ mb: 3 }}>
             <CardContent>
               <Box display="flex" alignItems="center" mb={3}>
-                <Avatar 
-                  sx={{ 
-                    width: 80, 
-                    height: 80, 
+                <Avatar
+                  sx={{
+                    width: 80,
+                    height: 80,
                     bgcolor: theme.palette.primary.main,
-                    fontSize: '2rem',
-                    mr: 2
+                    fontSize: "2rem",
+                    mr: 2,
                   }}
                 >
                   {name.charAt(0).toUpperCase()}
                 </Avatar>
                 <Box>
                   <Typography variant="h6">{name}</Typography>
-                  <Typography variant="body2" color="text.secondary">{email}</Typography>
-                  <Chip 
-                    label="Premium Üye" 
-                    size="small" 
-                    color="primary" 
+                  <Typography variant="body2" color="text.secondary">
+                    {email}
+                  </Typography>
+                  <Chip
+                    label="Premium Üye"
+                    size="small"
+                    color="primary"
                     variant="outlined"
                     sx={{ mt: 1 }}
                   />
                 </Box>
               </Box>
 
-              {saveStatus === 'success' && (
+              {saveStatus === "success" && (
                 <Alert severity="success" sx={{ mb: 2 }}>
                   <AlertTitle>Başarılı</AlertTitle>
                   Profil bilgileriniz güncellendi.
                 </Alert>
               )}
 
-              {saveStatus === 'error' && (
+              {saveStatus === "error" && (
                 <Alert severity="error" sx={{ mb: 2 }}>
                   <AlertTitle>Hata</AlertTitle>
                   Bir hata oluştu. Lütfen tekrar deneyin.
@@ -192,8 +196,8 @@ const Settings = () => {
               <Box display="flex" justifyContent="flex-end" mt={3}>
                 {isEditing ? (
                   <>
-                    <Button 
-                      variant="outlined" 
+                    <Button
+                      variant="outlined"
                       onClick={() => {
                         setIsEditing(false);
                         setFormData({ name, email });
@@ -202,18 +206,24 @@ const Settings = () => {
                     >
                       İptal
                     </Button>
-                    <Button 
-                      variant="contained" 
+                    <Button
+                      variant="contained"
                       onClick={handleSave}
-                      disabled={saveStatus === 'saving'}
-                      startIcon={saveStatus === 'saving' ? <CircularProgress size={20} /> : <SaveIcon />}
+                      disabled={saveStatus === "saving"}
+                      startIcon={
+                        saveStatus === "saving" ? (
+                          <CircularProgress size={20} />
+                        ) : (
+                          <SaveIcon />
+                        )
+                      }
                     >
-                      {saveStatus === 'saving' ? 'Kaydediliyor...' : 'Kaydet'}
+                      {saveStatus === "saving" ? "Kaydediliyor..." : "Kaydet"}
                     </Button>
                   </>
                 ) : (
-                  <Button 
-                    variant="outlined" 
+                  <Button
+                    variant="outlined"
                     startIcon={<EditIcon />}
                     onClick={() => setIsEditing(true)}
                   >
@@ -225,7 +235,7 @@ const Settings = () => {
           </Card>
         );
 
-      case 'appearance':
+      case "appearance":
         return (
           <Card variant="outlined" sx={{ mb: 3 }}>
             <CardContent>
@@ -255,30 +265,35 @@ const Settings = () => {
                   Renk Şeması
                 </Typography>
                 <Box display="flex" gap={2} flexWrap="wrap">
-                  {['#1976d2', '#9c27b0', '#2e7d32', '#d32f2f', '#ed6c02'].map((color) => (
-                    <Box
-                      key={color}
-                      sx={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: '50%',
-                        bgcolor: color,
-                        cursor: 'pointer',
-                        border: currentTheme === color ? `3px solid ${theme.palette.primary.main}` : 'none',
-                        '&:hover': {
-                          transform: 'scale(1.1)',
-                          transition: 'transform 0.2s',
-                        },
-                      }}
-                    />
-                  ))}
+                  {["#1976d2", "#9c27b0", "#2e7d32", "#d32f2f", "#ed6c02"].map(
+                    (color) => (
+                      <Box
+                        key={color}
+                        sx={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: "50%",
+                          bgcolor: color,
+                          cursor: "pointer",
+                          border:
+                            currentTheme === color
+                              ? `3px solid ${theme.palette.primary.main}`
+                              : "none",
+                          "&:hover": {
+                            transform: "scale(1.1)",
+                            transition: "transform 0.2s",
+                          },
+                        }}
+                      />
+                    )
+                  )}
                 </Box>
               </Box>
             </CardContent>
           </Card>
         );
 
-      case 'language':
+      case "language":
         return (
           <Card variant="outlined" sx={{ mb: 3 }}>
             <CardContent>
@@ -302,18 +317,14 @@ const Settings = () => {
                   <MenuItem value="en">English</MenuItem>
                 </Select>
               </FormControl>
-              
+
               <Box mt={4}>
                 <Typography variant="subtitle2" color="text.secondary">
                   Tarih ve Saat Formatı
                 </Typography>
                 <FormControl fullWidth margin="normal">
                   <InputLabel>Zaman Formatı</InputLabel>
-                  <Select
-                    value="24"
-                    defaultValue="24"
-                    label="Zaman Formatı"
-                  >
+                  <Select value="24" defaultValue="24" label="Zaman Formatı">
                     <MenuItem value="24">24 Saat (14:30)</MenuItem>
                     <MenuItem value="12">12 Saat (2:30 PM)</MenuItem>
                   </Select>
@@ -323,66 +334,66 @@ const Settings = () => {
           </Card>
         );
 
-      case 'notifications':
+      case "notifications":
         return (
           <Card variant="outlined" sx={{ mb: 3 }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Bildirim Ayarları
               </Typography>
-              
+
               <List>
                 <ListItem>
                   <ListItemIcon>
                     <EmailIcon color="action" />
                   </ListItemIcon>
-                  <ListItemText 
-                    primary="E-posta Bildirimleri" 
-                    secondary="Önemli güncellemeler ve etkinlikler hakkında e-posta alın" 
+                  <ListItemText
+                    primary="E-posta Bildirimleri"
+                    secondary="Önemli güncellemeler ve etkinlikler hakkında e-posta alın"
                   />
                   <ListItemSecondaryAction>
-                    <Switch 
-                      edge="end" 
+                    <Switch
+                      edge="end"
                       checked={notifications.email}
-                      onChange={() => handleNotificationToggle('email')}
+                      onChange={() => handleNotificationToggle("email")}
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
-                
+
                 <Divider component="li" />
-                
+
                 <ListItem>
                   <ListItemIcon>
                     <NotificationsIcon color="action" />
                   </ListItemIcon>
-                  <ListItemText 
-                    primary="Anlık Bildirimler" 
-                    secondary="Uygulama içi anlık bildirimleri alın" 
+                  <ListItemText
+                    primary="Anlık Bildirimler"
+                    secondary="Uygulama içi anlık bildirimleri alın"
                   />
                   <ListItemSecondaryAction>
-                    <Switch 
-                      edge="end" 
+                    <Switch
+                      edge="end"
                       checked={notifications.push}
-                      onChange={() => handleNotificationToggle('push')}
+                      onChange={() => handleNotificationToggle("push")}
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
-                
+
                 <Divider component="li" />
-                
+
                 <ListItem>
                   <ListItemIcon>
                     <NotificationsIcon color="action" />
                   </ListItemIcon>
-                  <ListItemText 
-                    primary="Sesli Bildirimler" 
-                    secondary="Bildirimler için ses efekti çal" 
+                  <ListItemText
+                    primary="Sesli Bildirimler"
+                    secondary="Bildirimler için ses efekti çal"
                   />
                   <ListItemSecondaryAction>
-                    <Switch 
-                      edge="end" 
+                    <Switch
+                      edge="end"
                       checked={notifications.sound}
-                      onChange={() => handleNotificationToggle('sound')}
+                      onChange={() => handleNotificationToggle("sound")}
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
@@ -391,60 +402,60 @@ const Settings = () => {
           </Card>
         );
 
-      case 'security':
+      case "security":
         return (
           <Card variant="outlined">
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Güvenlik Ayarları
               </Typography>
-              
+
               <List>
                 <ListItem button>
                   <ListItemIcon>
                     <LockIcon color="primary" />
                   </ListItemIcon>
-                  <ListItemText 
-                    primary="Şifre Değiştir" 
-                    secondary="Hesap şifrenizi güncelleyin" 
+                  <ListItemText
+                    primary="Şifre Değiştir"
+                    secondary="Hesap şifrenizi güncelleyin"
                   />
                 </ListItem>
-                
+
                 <Divider component="li" />
-                
+
                 <ListItem button>
                   <ListItemIcon>
                     <SecurityIcon color="primary" />
                   </ListItemIcon>
-                  <ListItemText 
-                    primary="İki Adımlı Doğrulama" 
-                    secondary="Hesap güvenliğinizi artırın" 
+                  <ListItemText
+                    primary="İki Adımlı Doğrulama"
+                    secondary="Hesap güvenliğinizi artırın"
                     secondaryTypographyProps={{
-                      color: 'primary',
-                      fontWeight: 'medium'
+                      color: "primary",
+                      fontWeight: "medium",
                     }}
                   />
-                  <Chip 
-                    label="Önerilir" 
-                    size="small" 
-                    color="primary" 
+                  <Chip
+                    label="Önerilir"
+                    size="small"
+                    color="primary"
                     variant="outlined"
                   />
                 </ListItem>
-                
+
                 <Divider component="li" />
-                
+
                 <ListItem button>
                   <ListItemIcon>
                     <CheckCircleIcon color="primary" />
                   </ListItemIcon>
-                  <ListItemText 
-                    primary="Oturumlar" 
-                    secondary="Aktif oturumları görüntüle ve yönet" 
+                  <ListItemText
+                    primary="Oturumlar"
+                    secondary="Aktif oturumları görüntüle ve yönet"
                   />
                 </ListItem>
               </List>
-              
+
               <Box mt={4}>
                 <Typography variant="subtitle2" color="error" gutterBottom>
                   Tehlike Bölgesi
@@ -452,11 +463,7 @@ const Settings = () => {
                 <Typography variant="body2" color="text.secondary" mb={2}>
                   Bu işlemler geri alınamaz. Lütfen dikkatli olun.
                 </Typography>
-                <Button 
-                  variant="outlined" 
-                  color="error"
-                  startIcon={<Delete />}
-                >
+                <Button variant="outlined" color="error" startIcon={<Delete />}>
                   Hesabı Sil
                 </Button>
               </Box>
@@ -470,43 +477,41 @@ const Settings = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', minHeight: 'calc(100vh - 64px)' }}>
+    <Box sx={{ display: "flex", minHeight: "calc(100vh - 64px)" }}>
       {/* Sidebar */}
-      <Paper 
-        elevation={0} 
+      <Paper
+        elevation={0}
         sx={{
           width: 280,
           flexShrink: 0,
           borderRight: `1px solid ${theme.palette.divider}`,
-          display: { xs: 'none', md: 'block' },
+          display: { xs: "none", md: "block" },
           p: 2,
         }}
       >
         <Typography variant="h6" sx={{ mb: 3, pl: 2, fontWeight: 600 }}>
           Ayarlar
         </Typography>
-        
+
         <List component="nav">
           {SETTINGS_SECTIONS.map((section) => (
-            <ListItem 
-              button 
+            <ListItem
+              button
               key={section.id}
               selected={activeSection === section.id}
               onClick={() => setActiveSection(section.id)}
               sx={{
                 borderRadius: 2,
                 mb: 0.5,
-                '&.Mui-selected': {
+                "&.Mui-selected": {
                   backgroundColor: theme.palette.action.selected,
-                  '&:hover': {
+                  "&:hover": {
                     backgroundColor: theme.palette.action.selected,
                   },
                 },
               }}
             >
-              <ListItemIcon sx={{ minWidth: 40 }}>
-                {section.icon}
-              </ListItemIcon>
+              <ListItemIcon sx={{ minWidth: 40 }}>{section.icon}</ListItemIcon>
               <ListItemText primary={section.label} />
             </ListItem>
           ))}
@@ -514,15 +519,21 @@ const Settings = () => {
       </Paper>
 
       {/* Main Content */}
-      <Box sx={{ flexGrow: 1, p: { xs: 2, md: 4 }, maxWidth: 'calc(100% - 280px)' }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+          p: { xs: 2, md: 4 },
+          maxWidth: "calc(100% - 280px)",
+        }}
+      >
         {/* Mobile Header */}
-        <Box sx={{ display: { xs: 'block', md: 'none' }, mb: 3 }}>
+        <Box sx={{ display: { xs: "block", md: "none" }, mb: 3 }}>
           <FormControl fullWidth>
             <Select
               value={activeSection}
               onChange={(e) => setActiveSection(e.target.value)}
               displayEmpty
-              inputProps={{ 'aria-label': 'Select setting section' }}
+              inputProps={{ "aria-label": "Select setting section" }}
             >
               {SETTINGS_SECTIONS.map((section) => (
                 <MenuItem key={section.id} value={section.id}>
@@ -538,9 +549,7 @@ const Settings = () => {
           </FormControl>
         </Box>
 
-        <Box sx={{ maxWidth: 800, mx: 'auto' }}>
-          {renderSection()}
-        </Box>
+        <Box sx={{ maxWidth: 800, mx: "auto" }}>{renderSection()}</Box>
       </Box>
     </Box>
   );

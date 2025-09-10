@@ -34,6 +34,36 @@ export const useTaskStore = create<TaskState>((set) => ({
       assignedTo: "Ahmet Yılmaz",
       status: "tamamlandı",
     },
+    {
+      id: 4,
+      title: "Proje Planlama",
+      assignedTo: "Zeynep Şahin",
+      status: "bekliyor",
+    },
+    {
+      id: 5,
+      title: "Teknik Geliştirme",
+      assignedTo: "Ayşe Demir",
+      status: "devam ediyor",
+    },
+    {
+      id: 6,
+      title: "Sistem Yedekleme",
+      assignedTo: "Mehmet Kaya",
+      status: "tamamlandı",
+    },
+    {
+      id: 7,
+      title: "Kurumsal Web Sitesi",
+      assignedTo: "Ahmet Yılmaz",
+      status: "bekliyor",
+    },
+    {
+      id: 8,
+      title: "Kurumsal Raporlama",
+      assignedTo: "Zeynep Şahin",
+      status: "devam ediyor",
+    },
   ],
   addTask: (task) =>
     set((state) => ({

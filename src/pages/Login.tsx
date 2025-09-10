@@ -19,7 +19,7 @@ function Login() {
 
   const handleLogin = () => {
     if (username.trim() === "") return;
-    login(role as "owner" | "manager" | "employee");
+    login(role as "sahip" | "yonetici" | "calisan");
     navigate("/");
   };
 

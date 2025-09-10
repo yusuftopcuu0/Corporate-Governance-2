@@ -4,7 +4,7 @@ interface BotMessage {
   id: number;
   sender: "user" | "bot";
   text: string;
-  timestamp: string;
+  timestamp: Date;
 }
 
 interface ChatBotState {
@@ -15,11 +15,11 @@ interface ChatBotState {
 export const useChatBotStore = create<ChatBotState>((set) => ({
   messages: [],
   sendMessage: (text: string) => {
-    const userMsg = {
+    const userMsg: BotMessage = {
       id: Date.now(),
-      sender: "user" as const,
+      sender: "user",
       text,
-      timestamp: new Date().toLocaleTimeString(),
+      timestamp: new Date(),
     };
 
     const lowerText = text.toLowerCase();
@@ -73,7 +73,7 @@ export const useChatBotStore = create<ChatBotState>((set) => ({
       lowerText === "yardim"
     ) {
       botReply =
-        "Şu konularda bilgi verebilirim: şirket bilgileri, hizmetlerimiz, iletişim bilgileri. Size nasıl yardımcı olabilirim? ";
+        "Şu konularda bilgi verebilirim: şirket bilgileri, hizmetlerimiz, iletişim bilgileri. Size nasıl yardımcı olabilirim?";
     }
 
     if (
@@ -105,11 +105,11 @@ export const useChatBotStore = create<ChatBotState>((set) => ({
         "Çalışma saatlerimiz: Hafta içi 09:00 - 18:00 arasındayız. Hafta sonları kapalıyız.";
     }
 
-    const botMsg = {
+    const botMsg: BotMessage = {
       id: Date.now() + 1,
-      sender: "bot" as const,
+      sender: "bot",
       text: botReply,
-      timestamp: new Date().toLocaleTimeString(),
+      timestamp: new Date(),
     };
 
     set((state) => ({

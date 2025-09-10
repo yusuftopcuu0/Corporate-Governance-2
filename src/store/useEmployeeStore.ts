@@ -5,6 +5,8 @@ export interface Employee {
   name: string;
   role: "calisan" | "yönetici";
   department: string;
+  projects: number;
+  tasks: number;
 }
 
 interface EmployeeState {
@@ -20,12 +22,49 @@ export const useEmployeeStore = create<EmployeeState>((set) => ({
       name: "Yusuf",
       role: "yönetici",
       department: "Veri & Analiz",
+      projects: 7,
+      tasks: 1,
     },
-    { id: 2, name: "Eda", role: "calisan", department: "Frontend" },
-    { id: 3, name: "Mehmet", role: "calisan", department: "Backend" },
-    { id: 4, name: "Zeynep", role: "calisan", department: "Veri" },
-    { id: 5, name: "Kübra", role: "calisan", department: "Full Stack" },
-    { id: 6, name: "Mustafa", role: "calisan", department: "Full Stack" },
+    {
+      id: 2,
+      name: "Eda",
+      role: "calisan",
+      department: "Frontend",
+      projects: 2,
+      tasks: 2,
+    },
+    {
+      id: 3,
+      name: "Mehmet",
+      role: "calisan",
+      department: "Backend",
+      projects: 3,
+      tasks: 3,
+    },
+    {
+      id: 4,
+      name: "Zeynep",
+      role: "calisan",
+      department: "Veri",
+      projects: 4,
+      tasks: 4,
+    },
+    {
+      id: 5,
+      name: "Kübra",
+      role: "calisan",
+      department: "Full Stack",
+      projects: 5,
+      tasks: 5,
+    },
+    {
+      id: 6,
+      name: "Mustafa",
+      role: "calisan",
+      department: "Full Stack",
+      projects: 6,
+      tasks: 6,
+    },
   ],
   addEmployee: (employee) =>
     set((state) => ({
