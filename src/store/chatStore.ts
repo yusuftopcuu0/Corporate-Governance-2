@@ -5,6 +5,7 @@ export interface Message {
   sender: string;
   receiver: string;
   text: string;
+  read: boolean;
   timestamp: string;
 }
 
@@ -24,7 +25,8 @@ export const useChatStore = create<ChatState>((set) => ({
           sender,
           receiver,
           text,
-          timestamp: new Date().toLocaleTimeString(),
+          read: false,
+          timestamp: new Date().toISOString(),
         },
       ],
     })),
