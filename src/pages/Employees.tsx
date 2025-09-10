@@ -165,7 +165,7 @@ export default function Employees() {
               />
             </Grid>
             <Grid item xs={12} md={5}>
-              <FormControl fullWidth>
+              <FormControl fullWidth sx={{ width: "180px" }}>
                 <InputLabel id="department-filter-label">
                   Departman Filtrele
                 </InputLabel>

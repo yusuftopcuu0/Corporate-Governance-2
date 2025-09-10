@@ -477,7 +477,7 @@ const Settings = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", minHeight: "calc(100vh - 64px)" }}>
+    <Box sx={{ display: "flex" }}>
       {/* Sidebar */}
       <Paper
         elevation={0}

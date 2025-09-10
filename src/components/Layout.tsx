@@ -11,6 +11,7 @@ import {
   Button,
 } from "@mui/material";
 import { useAuthStore } from "../store/useAuthStore";
+import Logo from "../images/logo-ai.png";
 
 const menuItems = [
   { text: "Dashboard", path: "/" },
@@ -38,13 +39,9 @@ export default function Layout() {
         </Toolbar>
       </AppBar>
 
-      <Drawer variant="permanent" sx={{ width: 240 }}>
+      <Drawer variant="permanent" sx={{ width: 130 }}>
         <Toolbar>
-          <Typography variant="h6" noWrap component="div" paddingLeft={2}>
-            <hr />
-            CM
-            <hr />
-          </Typography>
+          <img src={Logo} alt="Logo" width={100} />
         </Toolbar>
         <List sx={{ p: 1 }}>
           {menuItems.map((item) => (
@@ -55,8 +52,9 @@ export default function Layout() {
           <Button
             variant="outlined"
             color="error"
-            sx={{ mt: 4 }}
+            sx={{ mt: 1 }}
             onClick={logout}
+            fullWidth
           >
             Çıkış Yap
           </Button>
