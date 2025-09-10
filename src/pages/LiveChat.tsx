@@ -34,7 +34,7 @@ export default function LiveChat() {
     <Box p={3}>
       <Box>
         <Typography variant="h4" justifyContent={"center"}>
-          Live Chat
+          Canlı Sohbet
         </Typography>
         <Card
           sx={{
@@ -87,7 +87,7 @@ export default function LiveChat() {
               variant="outlined"
               size="small"
               fullWidth
-              placeholder="Type your message..."
+              placeholder="Mesajınızı yazınız..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}

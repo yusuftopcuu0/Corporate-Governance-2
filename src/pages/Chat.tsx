@@ -51,7 +51,7 @@ const Chat = () => {
         <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
           <CardContent>
             <Typography variant="h6" gutterBottom textAlign="center">
-              Users
+              Kullanıcılar
             </Typography>
             <hr />
             <List>
@@ -127,7 +127,7 @@ const Chat = () => {
             variant="outlined"
             size="small"
             fullWidth
-            placeholder={`Message ${selectedUser}`}
+            placeholder={`Mesaj ${selectedUser}`}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}

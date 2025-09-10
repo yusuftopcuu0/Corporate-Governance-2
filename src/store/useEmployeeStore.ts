@@ -3,7 +3,7 @@ import { create } from "zustand";
 export interface Employee {
   id: number;
   name: string;
-  role: "employee" | "manager";
+  role: "calisan" | "yönetici";
   department: string;
 }
 
@@ -18,14 +18,14 @@ export const useEmployeeStore = create<EmployeeState>((set) => ({
     {
       id: 1,
       name: "Yusuf",
-      role: "manager",
+      role: "yönetici",
       department: "Veri & Analiz",
     },
-    { id: 2, name: "Eda", role: "employee", department: "Frontend" },
-    { id: 3, name: "Mehmet", role: "employee", department: "Backend" },
-    { id: 4, name: "Zeynep", role: "employee", department: "Veri" },
-    { id: 5, name: "Kübra", role: "employee", department: "Full Stack" },
-    { id: 6, name: "Mustafa", role: "employee", department: "Full Stack" },
+    { id: 2, name: "Eda", role: "calisan", department: "Frontend" },
+    { id: 3, name: "Mehmet", role: "calisan", department: "Backend" },
+    { id: 4, name: "Zeynep", role: "calisan", department: "Veri" },
+    { id: 5, name: "Kübra", role: "calisan", department: "Full Stack" },
+    { id: 6, name: "Mustafa", role: "calisan", department: "Full Stack" },
   ],
   addEmployee: (employee) =>
     set((state) => ({

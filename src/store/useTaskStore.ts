@@ -4,7 +4,7 @@ export interface Task {
   id: number;
   title: string;
   assignedTo: string; // çalışanın adı
-  status: "pending" | "in-progress" | "done";
+  status: "bekliyor" | "devam ediyor" | "tamamlandı";
 }
 
 interface TaskState {
@@ -20,19 +20,19 @@ export const useTaskStore = create<TaskState>((set) => ({
       id: 1,
       title: "Rapor Hazırlama",
       assignedTo: "Ayşe Demir",
-      status: "pending",
+      status: "bekliyor",
     },
     {
       id: 2,
       title: "Toplantı Planlama",
       assignedTo: "Mehmet Kaya",
-      status: "in-progress",
+      status: "devam ediyor",
     },
     {
       id: 3,
       title: "Sunum Hazırlama",
       assignedTo: "Ahmet Yılmaz",
-      status: "done",
+      status: "tamamlandı",
     },
   ],
   addTask: (task) =>

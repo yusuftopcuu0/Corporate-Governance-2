@@ -36,12 +36,12 @@ function Login() {
         }}
       >
         <Typography variant="h5" gutterBottom>
-          Login
+          Giriş Yap
         </Typography>
         <TextField
           fullWidth
           margin="normal"
-          label="Username"
+          label="Kullanıcı Adı"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -49,13 +49,13 @@ function Login() {
           fullWidth
           select
           margin="normal"
-          label="Role"
+          label="Rol"
           value={role}
           onChange={(e) => setRole(e.target.value)}
         >
-          <MenuItem value="owner">Owner</MenuItem>
-          <MenuItem value="manager">Manager</MenuItem>
-          <MenuItem value="employee">Employee</MenuItem>
+          <MenuItem value="owner">Sahip</MenuItem>
+          <MenuItem value="manager">Yönetici</MenuItem>
+          <MenuItem value="employee">Çalışan</MenuItem>
         </TextField>
         <Button
           fullWidth
@@ -63,7 +63,7 @@ function Login() {
           sx={{ mt: 2 }}
           onClick={handleLogin}
         >
-          Login
+          Giriş Yap
         </Button>
       </Box>
     </Container>

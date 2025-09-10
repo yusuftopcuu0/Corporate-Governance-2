@@ -28,7 +28,7 @@ export default function Tasks() {
     role === "owner"
       ? tasks
       : role === "manager"
-      ? tasks.filter((t) => t.assignedTo !== "Owner") // örnek mantık
+      ? tasks.filter((t) => t.assignedTo !== "Owner")
       : tasks.filter((t) => t.assignedTo === "Ayşe Demir"); // employee için örnek kullanıcı
 
   const handleAdd = () => {
@@ -41,7 +41,7 @@ export default function Tasks() {
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Tasks
+        Görevler
       </Typography>
 
       {/* Sadece Manager görev ekleyebilir */}

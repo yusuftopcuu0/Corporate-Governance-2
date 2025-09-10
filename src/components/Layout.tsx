@@ -14,11 +14,11 @@ import { useAuthStore } from "../store/useAuthStore";
 
 const menuItems = [
   { text: "Dashboard", path: "/" },
-  { text: "Employees", path: "/employees" },
-  { text: "Tasks", path: "/tasks" },
-  { text: "Chat", path: "/chat" },
-  { text: "Live Chat", path: "/live-chat" },
-  { text: "Settings", path: "/settings" },
+  { text: "Çalışanlar", path: "/employees" },
+  { text: "Görevler", path: "/tasks" },
+  { text: "Sohbet", path: "/chat" },
+  { text: "Canlı Sohbet", path: "/live-chat" },
+  { text: "Ayarlar", path: "/settings" },
 ];
 
 export default function Layout() {
@@ -32,7 +32,7 @@ export default function Layout() {
     <Box sx={{ display: "flex" }}>
       <AppBar position="fixed">
         <Toolbar>
-          <Typography variant="h6" noWrap component="div" marginLeft={14}>
+          <Typography variant="h6" noWrap component="div" marginLeft={17}>
             Company Management
           </Typography>
         </Toolbar>
@@ -63,7 +63,7 @@ export default function Layout() {
         </List>
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3, ml: 30 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, ml: 30, height: "100%" }}>
         <Toolbar />
         <Outlet />
       </Box>

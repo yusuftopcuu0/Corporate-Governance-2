@@ -23,7 +23,7 @@ export const useChatBotStore = create<ChatBotState>((set) => ({
     };
 
     const lowerText = text.toLowerCase();
-    let botReply = "Destek ekibimiz size yardımcı olacaktır";
+    let botReply = "Destek ekibimiz size en kısa zamanda dönüş yapacaktır.";
 
     if (
       lowerText.includes("merhaba") ||

@@ -35,23 +35,23 @@ export default function Employees() {
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Employees
+        Çalışanlar
       </Typography>
 
       {role === "owner" && (
         <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
           <TextField
-            label="Name"
+            label="İsim"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <TextField
-            label="Department"
+            label="Departman"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
           />
           <Button variant="contained" onClick={handleAdd}>
-            Add
+            Ekle
           </Button>
         </Box>
       )}
@@ -76,7 +76,7 @@ export default function Employees() {
                     sx={{ mt: 2 }}
                     onClick={() => removeEmployee(emp.id)}
                   >
-                    Delete
+                    Sil
                   </Button>
                 )}
               </CardContent>

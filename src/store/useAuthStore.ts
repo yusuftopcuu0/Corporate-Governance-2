@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type Role = "owner" | "manager" | "employee";
+type Role = "sahip" | "yönetici" | "calisan";
 
 interface AuthState {
   isAuthenticated: boolean;
