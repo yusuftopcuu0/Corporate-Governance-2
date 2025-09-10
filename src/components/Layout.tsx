@@ -63,7 +63,7 @@ export default function Layout() {
         </List>
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3, ml: 30, height: "100%" }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, height: "100%" }}>
         <Toolbar />
         <Outlet />
       </Box>

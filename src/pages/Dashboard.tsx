@@ -97,14 +97,14 @@ const Dashboard = () => {
       id: 1,
       user: "Yusuf Topçu",
       action: "proje durumunu güncelledi",
-      time: "1 dk önce",
+      time: "4 dk önce",
       icon: <CheckCircle color="success" />,
     },
     {
       id: 2,
       user: "Ahmet Yılmaz",
       action: "yeni bir görev oluşturdu",
-      time: "5 dk önce",
+      time: "25 dk önce",
       icon: <Assignment color="primary" />,
     },
     {
@@ -116,7 +116,7 @@ const Dashboard = () => {
     },
     {
       id: 4,
-      user: "Mehmet Kaya",
+      user: "Mehmet  Kaya",
       action: "önemli bir duyuru yayınladı",
       time: "3 saat önce",
       icon: <Notifications color="warning" />,
