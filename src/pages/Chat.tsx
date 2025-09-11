@@ -31,7 +31,7 @@ import { useChatStore } from "../store/chatStore";
 import { useAuthStore } from "../store/useAuthStore";
 import { useEmployeeStore } from "../store/useEmployeeStore";
 
-// Generate color from string for avatar
+// Create color for avatar
 const stringToColor = (string: string) => {
   let hash = 0;
   for (let i = 0; i < string.length; i += 1) {
@@ -41,7 +41,6 @@ const stringToColor = (string: string) => {
   return `hsl(${hue}, 70%, 60%)`;
 };
 
-// User avatar component with online status
 const UserAvatar = ({
   name,
   isOnline = false,
@@ -89,7 +88,7 @@ const Chat = () => {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth < 900);
   const [showUserList, setShowUserList] = useState(true);
 
-  // Kullanıcı listesi rol bazlı - useMemo ile optimize edildi
+  // Kullanıcı listesi rol bazlı
   const users = useMemo(() => {
     if (role === "sahip") {
       return [
@@ -106,14 +105,13 @@ const Chat = () => {
     return [...new Set([...employees.map((e) => e.name), "Tüm Kullanıcılar"])];
   }, [role, employees]);
 
-  // Set first user as selected on initial load
+  // Chat kısmında başlangıçta, solda en üstteki kişi görünür
   useEffect(() => {
     if (users.length > 0 && !selectedUser) {
       setSelectedUser(users[0]);
     }
   }, [users, selectedUser]);
 
-  // Handle window resize
   useEffect(() => {
     const handleResize = () => {
       const isMobile = window.innerWidth < 900;
@@ -127,7 +125,6 @@ const Chat = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Scroll to bottom when messages change
   useEffect(() => {
     scrollToBottom();
   }, [messages, selectedUser]);
@@ -161,7 +158,6 @@ const Chat = () => {
     }
   };
 
-  // Filtrelenmiş mesajlar
   const filteredMessages = messages.filter(
     (msg) =>
       (msg.sender === selectedUser && msg.receiver === userName) ||
@@ -170,7 +166,6 @@ const Chat = () => {
         (msg.receiver === "Tüm Kullanıcılar" || msg.sender === userName))
   );
 
-  // Kullanıcının son mesajını al
   const getLastMessage = (user: string) => {
     const userMessages = messages.filter(
       (msg) =>
@@ -180,7 +175,6 @@ const Chat = () => {
     return userMessages[userMessages.length - 1];
   };
 
-  // Filtrelenmiş kullanıcılar
   const filteredUsers = users.filter(
     (user) =>
       user.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -250,7 +244,7 @@ const Chat = () => {
                     <ArrowBackIcon />
                   </IconButton>
                 )}
-                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                <Typography variant="h6" sx={{ fontWeight: 600, pl: "115px" }}>
                   Sohbetler
                 </Typography>
               </Box>

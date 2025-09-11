@@ -88,13 +88,11 @@ export default function Tasks() {
   const { role } = useAuthStore();
   const { tasks, addTask, updateTask, removeTask } = useTaskStore();
 
-  // State'ler
   const [title, setTitle] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("");
 
-  // Kullanıcı listesi (gerçek uygulamada API'den çekilebilir)
   const users = ["Ayşe Demir", "Mehmet Kaya", "Zeynep Şahin", "Ahmet Yılmaz"];
 
   // Rol bazlı filtreleme
@@ -122,20 +120,17 @@ export default function Tasks() {
         )
       : 0;
 
-  // Yeni görev ekle
   const handleAdd = () => {
     if (title.trim() === "" || assignedTo.trim() === "") return;
     addTask({
       title,
       assignedTo,
       status: "bekliyor" as const,
-      // Burada gerçek uygulamada daha fazla alan eklenebilir
     });
     setTitle("");
     setAssignedTo("");
   };
 
-  // Görev durumunu güncelle
   const handleStatusChange = (taskId: number, currentStatus: string) => {
     let newStatus: "bekliyor" | "devam ediyor" | "tamamlandı" | "iptal";
 
@@ -190,7 +185,6 @@ export default function Tasks() {
           )}
         </Box>
 
-        {/* Yeni Görev Ekle Butonu */}
         {(role === "sahip" || role === "yonetici") && (
           <Button
             variant="contained"
@@ -214,7 +208,6 @@ export default function Tasks() {
         )}
       </Box>
 
-      {/* Filtreleme ve Arama */}
       <Card sx={{ mb: 3, borderRadius: 3, boxShadow: 4 }}>
         <CardContent>
           <Grid container spacing={2} alignItems="center">
@@ -236,7 +229,7 @@ export default function Tasks() {
               />
             </Grid>
             <Grid item xs={12} md={5}>
-              <FormControl fullWidth>
+              <FormControl fullWidth sx={{ width: "200px" }}>
                 <InputLabel id="status-filter-label">
                   Duruma Göre Filtrele
                 </InputLabel>

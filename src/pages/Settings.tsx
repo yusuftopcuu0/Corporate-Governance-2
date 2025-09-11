@@ -32,26 +32,37 @@ import {
   Email as EmailIcon,
   Palette as PaletteIcon,
   Language as LanguageIcon,
-  Lock as LockIcon,
   Notifications as NotificationsIcon,
-  Security as SecurityIcon,
-  CheckCircle as CheckCircleIcon,
   Edit as EditIcon,
   Save as SaveIcon,
+  Logout as LogoutIcon,
 } from "@mui/icons-material";
 import { useSettingsStore } from "../store/settingsStore";
+import { useAuthStore } from "../store/useAuthStore";
 
-// Settings sections
 const SETTINGS_SECTIONS = [
   { id: "profile", label: "Profil", icon: <PersonIcon /> },
   { id: "appearance", label: "Görünüm", icon: <PaletteIcon /> },
   { id: "language", label: "Dil", icon: <LanguageIcon /> },
   { id: "notifications", label: "Bildirimler", icon: <NotificationsIcon /> },
-  { id: "security", label: "Güvenlik", icon: <SecurityIcon /> },
+  {
+    id: "logout",
+    label: "Çıkış Yap",
+    icon: <LogoutIcon sx={{ color: "error.main" }} />,
+    textProps: {
+      primaryTypographyProps: { sx: { color: "error.main", fontWeight: 600 } },
+    },
+    onClick: (logout: () => void) => {
+      if (window.confirm("Çıkış yapmak istediğinize emin misiniz?")) {
+        logout();
+      }
+    },
+  },
 ];
 
 const Settings = () => {
   const theme = useTheme();
+  const { logout } = useAuthStore();
   const {
     theme: currentTheme,
     language,
@@ -89,7 +100,6 @@ const Settings = () => {
       setSaveStatus("success");
       setIsEditing(false);
 
-      // Reset success message after 3 seconds
       setTimeout(() => {
         setSaveStatus("idle");
       }, 3000);
@@ -104,6 +114,17 @@ const Settings = () => {
       ...prev,
       [setting]: !prev[setting as keyof typeof prev],
     }));
+  };
+
+  const handleSectionClick = (sectionId: string) => {
+    if (sectionId === "logout") {
+      const section = SETTINGS_SECTIONS.find((s) => s.id === "logout");
+      if (section?.onClick) {
+        section.onClick(logout);
+      }
+      return;
+    }
+    setActiveSection(sectionId);
   };
 
   const renderSection = () => {
@@ -402,75 +423,6 @@ const Settings = () => {
           </Card>
         );
 
-      case "security":
-        return (
-          <Card variant="outlined">
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Güvenlik Ayarları
-              </Typography>
-
-              <List>
-                <ListItem button>
-                  <ListItemIcon>
-                    <LockIcon color="primary" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Şifre Değiştir"
-                    secondary="Hesap şifrenizi güncelleyin"
-                  />
-                </ListItem>
-
-                <Divider component="li" />
-
-                <ListItem button>
-                  <ListItemIcon>
-                    <SecurityIcon color="primary" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="İki Adımlı Doğrulama"
-                    secondary="Hesap güvenliğinizi artırın"
-                    secondaryTypographyProps={{
-                      color: "primary",
-                      fontWeight: "medium",
-                    }}
-                  />
-                  <Chip
-                    label="Önerilir"
-                    size="small"
-                    color="primary"
-                    variant="outlined"
-                  />
-                </ListItem>
-
-                <Divider component="li" />
-
-                <ListItem button>
-                  <ListItemIcon>
-                    <CheckCircleIcon color="primary" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Oturumlar"
-                    secondary="Aktif oturumları görüntüle ve yönet"
-                  />
-                </ListItem>
-              </List>
-
-              <Box mt={4}>
-                <Typography variant="subtitle2" color="error" gutterBottom>
-                  Tehlike Bölgesi
-                </Typography>
-                <Typography variant="body2" color="text.secondary" mb={2}>
-                  Bu işlemler geri alınamaz. Lütfen dikkatli olun.
-                </Typography>
-                <Button variant="outlined" color="error" startIcon={<Delete />}>
-                  Hesabı Sil
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        );
-
       default:
         return null;
     }
@@ -493,26 +445,27 @@ const Settings = () => {
           Ayarlar
         </Typography>
 
-        <List component="nav">
+        <List component="nav" sx={{ width: "100%" }}>
           {SETTINGS_SECTIONS.map((section) => (
             <ListItem
               button
               key={section.id}
               selected={activeSection === section.id}
-              onClick={() => setActiveSection(section.id)}
+              onClick={() => handleSectionClick(section.id)}
               sx={{
-                borderRadius: 2,
+                borderRadius: 1,
                 mb: 0.5,
-                "&.Mui-selected": {
-                  backgroundColor: theme.palette.action.selected,
-                  "&:hover": {
-                    backgroundColor: theme.palette.action.selected,
-                  },
+                cursor: "pointer",
+                "&:hover": {
+                  backgroundColor: "action.hover",
                 },
               }}
             >
               <ListItemIcon sx={{ minWidth: 40 }}>{section.icon}</ListItemIcon>
-              <ListItemText primary={section.label} />
+              <ListItemText
+                primary={section.label}
+                {...(section.textProps || {})}
+              />
             </ListItem>
           ))}
         </List>

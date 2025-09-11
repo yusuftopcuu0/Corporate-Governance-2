@@ -23,7 +23,6 @@ import { useEmployeeStore } from "../store/useEmployeeStore";
 import { Search, Add, Delete, Edit, FilterList } from "@mui/icons-material";
 import { deepPurple, green, blue, orange, red } from "@mui/material/colors";
 
-// Departman renkleri
 const departmentColors: { [key: string]: string } = {
   IT: blue[500],
   İK: green[500],

@@ -37,7 +37,6 @@ import {
 } from "@mui/icons-material";
 
 const Dashboard = () => {
-  // Mock veriler
   const stats = [
     {
       title: "Toplam Çalışan",
@@ -247,7 +246,6 @@ const Dashboard = () => {
 
       {/* Grafikler ve İçerik */}
       <Grid container spacing={3} mt={2}>
-        {/* Pie Chart - Departman dağılımı */}
         <Grid item xs={12} md={4}>
           <Card
             sx={{
@@ -321,7 +319,6 @@ const Dashboard = () => {
           </Card>
         </Grid>
 
-        {/* Bar Chart - Aylık mesaj trafiği */}
         <Grid item xs={12} md={5}>
           <Card
             sx={{
@@ -415,7 +412,6 @@ const Dashboard = () => {
           </Card>
         </Grid>
 
-        {/* Son Aktiviteler */}
         <Grid item xs={12} md={3}>
           <Card
             sx={{
@@ -490,7 +486,6 @@ const Dashboard = () => {
         </Grid>
       </Grid>
 
-      {/* Proje Durumları */}
       <Grid container spacing={3} mt={2}>
         <Grid item xs={12}>
           <Card

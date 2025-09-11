@@ -8,7 +8,6 @@ import {
   ListItem,
   ListItemText,
   Box,
-  Button,
 } from "@mui/material";
 import { useAuthStore } from "../store/useAuthStore";
 import Logo from "../images/logo-ai.png";
@@ -23,7 +22,7 @@ const menuItems = [
 ];
 
 export default function Layout() {
-  const { isAuthenticated, logout } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -31,7 +30,7 @@ export default function Layout() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={{ bgcolor: "#000" }}>
         <Toolbar>
           <Typography variant="h6" noWrap component="div" marginLeft={17}>
             Company Management
@@ -49,19 +48,10 @@ export default function Layout() {
               <ListItemText primary={item.text} />
             </ListItem>
           ))}
-          <Button
-            variant="outlined"
-            color="error"
-            sx={{ mt: 1 }}
-            onClick={logout}
-            fullWidth
-          >
-            Çıkış Yap
-          </Button>
         </List>
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3, height: "100%" }}>
+      <Box component="main" sx={{ flexGrow: 1, pl: 1, height: "100%" }}>
         <Toolbar />
         <Outlet />
       </Box>

@@ -22,7 +22,7 @@ import {
 import { format } from "date-fns";
 import { useChatBotStore } from "../store/chatBotStore";
 
-// Generate color from string for avatar
+// Create color for avatar
 const stringToColor = (string: string) => {
   let hash = 0;
   for (let i = 0; i < string.length; i += 1) {
@@ -32,7 +32,6 @@ const stringToColor = (string: string) => {
   return `hsl(${hue}, 70%, 60%)`;
 };
 
-// User avatar component with online status
 const UserAvatar = ({
   name,
   isOnline = false,
@@ -67,7 +66,6 @@ export default function LiveChat() {
   const { messages, sendMessage } = useChatBotStore();
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [, setIsMobileView] = useState(window.innerWidth < 900);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -76,16 +74,6 @@ export default function LiveChat() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
-
-  // Handle window resize
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileView(window.innerWidth < 900);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -107,16 +95,9 @@ export default function LiveChat() {
         display: "flex",
         flexDirection: "column",
         // bgcolor: theme.palette.background.default,
-        p: 2,
+        p: 0.1,
       }}
     >
-      <Typography
-        variant="h4"
-        sx={{ mb: 3, fontWeight: 600, color: theme.palette.text.primary }}
-      >
-        Canlı Sohbet
-      </Typography>
-
       <Card
         sx={{
           flex: 1,
@@ -128,7 +109,6 @@ export default function LiveChat() {
           bgcolor: "background.paper",
         }}
       >
-        {/* Chat header */}
         <Box
           sx={{
             p: 2,
@@ -305,7 +285,6 @@ export default function LiveChat() {
           )}
         </Box>
 
-        {/* Message input */}
         <Box
           sx={{
             p: 2,
