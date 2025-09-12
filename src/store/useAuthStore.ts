@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { toast } from "react-toastify";
 
 type Role = "sahip" | "yonetici" | "calisan";
 
@@ -15,8 +16,14 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       isAuthenticated: false,
       role: null,
-      login: (role) => set({ isAuthenticated: true, role }),
-      logout: () => set({ isAuthenticated: false, role: null }),
+      login: (role) => {
+        set({ isAuthenticated: true, role });
+        toast.success("Giriş Yapıldı");
+      },
+      logout: () => {
+        set({ isAuthenticated: false, role: null });
+        toast.error("Çıkış Yapıldı");
+      },
     }),
     {
       name: "auth-storage",

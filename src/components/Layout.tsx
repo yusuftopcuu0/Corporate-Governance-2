@@ -45,7 +45,7 @@ export default function Layout() {
         <List sx={{ p: 1 }}>
           {menuItems.map((item) => (
             <ListItem component={Link} to={item.path} key={item.text}>
-              <ListItemText primary={item.text} />
+              <ListItemText primary={item.text} sx={{ color: "#000" }} />
             </ListItem>
           ))}
         </List>

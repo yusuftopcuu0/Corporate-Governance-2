@@ -131,7 +131,16 @@ const Settings = () => {
     switch (activeSection) {
       case "profile":
         return (
-          <Card variant="outlined" sx={{ mb: 3 }}>
+          <Card
+            variant="outlined"
+            sx={{
+              height: "100vh",
+              backgroundColor: "#fff",
+              width: "1069px",
+              ml: -17,
+              mt: -4,
+            }}
+          >
             <CardContent>
               <Box display="flex" alignItems="center" mb={3}>
                 <Avatar
@@ -258,7 +267,17 @@ const Settings = () => {
 
       case "appearance":
         return (
-          <Card variant="outlined" sx={{ mb: 3 }}>
+          <Card
+            variant="outlined"
+            sx={{
+              mb: 3,
+              height: "91vh",
+              backgroundColor: "#fff",
+              ml: -17,
+              width: "1069px",
+              mt: -4,
+            }}
+          >
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Tema Ayarları
@@ -316,7 +335,17 @@ const Settings = () => {
 
       case "language":
         return (
-          <Card variant="outlined" sx={{ mb: 3 }}>
+          <Card
+            variant="outlined"
+            sx={{
+              mb: 3,
+              height: "91vh",
+              backgroundColor: "#fff",
+              ml: -17,
+              width: "1069px",
+              mt: -4,
+            }}
+          >
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Dil Tercihleri
@@ -357,7 +386,17 @@ const Settings = () => {
 
       case "notifications":
         return (
-          <Card variant="outlined" sx={{ mb: 3 }}>
+          <Card
+            variant="outlined"
+            sx={{
+              mb: 3,
+              height: "91vh",
+              backgroundColor: "#fff",
+              ml: -17,
+              width: "1069px",
+              mt: -4,
+            }}
+          >
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Bildirim Ayarları
@@ -439,6 +478,8 @@ const Settings = () => {
           borderRight: `1px solid ${theme.palette.divider}`,
           display: { xs: "none", md: "block" },
           p: 2,
+          backgroundColor: "#fcfcfc",
+          height: "100vh",
         }}
       >
         <Typography variant="h6" sx={{ mb: 3, pl: 2, fontWeight: 600 }}>

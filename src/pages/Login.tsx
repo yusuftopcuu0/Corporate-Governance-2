@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function Login() {
   const [role, setRole] = useState("employee");
 
   const handleLogin = () => {
-    if (username.trim() === "") return;
+    if (username.trim() === "") return toast.error("Kullanıcı Adı Boş Olamaz");
     login(role as "sahip" | "yonetici" | "calisan");
     navigate("/");
   };

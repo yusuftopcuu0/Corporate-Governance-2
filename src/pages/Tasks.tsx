@@ -120,17 +120,6 @@ export default function Tasks() {
         )
       : 0;
 
-  const handleAdd = () => {
-    if (title.trim() === "" || assignedTo.trim() === "") return;
-    addTask({
-      title,
-      assignedTo,
-      status: "bekliyor" as const,
-    });
-    setTitle("");
-    setAssignedTo("");
-  };
-
   const handleStatusChange = (taskId: number, currentStatus: string) => {
     let newStatus: "bekliyor" | "devam ediyor" | "tamamlandı" | "iptal";
 
@@ -484,23 +473,6 @@ export default function Tasks() {
                     ))}
                   </Select>
                 </FormControl>
-              </Grid>
-              <Grid item xs={12} md={2}>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  onClick={handleAdd}
-                  disabled={!title.trim() || !assignedTo.trim()}
-                  sx={{
-                    borderRadius: 3,
-                    py: 1.5,
-                    textTransform: "none",
-                    fontWeight: "bold",
-                  }}
-                  startIcon={<Add />}
-                >
-                  Ekle
-                </Button>
               </Grid>
             </Grid>
           </Card>

@@ -26,6 +26,19 @@ export const useChatBotStore = create<ChatBotState>((set) => ({
     let botReply = "Destek ekibimiz size en kısa zamanda dönüş yapacaktır.";
 
     if (
+      lowerText.includes("yardım") ||
+      lowerText.includes("destek") ||
+      lowerText.includes("bilgi al") ||
+      lowerText.includes("bilgi") ||
+      lowerText.includes("bilgi ver") ||
+      lowerText === "?" ||
+      lowerText === "yardim"
+    ) {
+      botReply =
+        "Şu konularda bilgi verebilirim: şirket bilgileri, hizmetlerimiz, iletişim bilgileri, çalışma saatleri. Size nasıl yardımcı olabilirim?";
+    }
+
+    if (
       lowerText.includes("merhaba") ||
       lowerText.includes("selam") ||
       lowerText === "slm" ||
@@ -35,15 +48,6 @@ export const useChatBotStore = create<ChatBotState>((set) => ({
       lowerText.includes("iyi akşamlar")
     ) {
       botReply = "Merhaba! Size nasıl yardımcı olabilirim?";
-    }
-
-    if (
-      lowerText.includes("şirket") ||
-      lowerText.includes("firma") ||
-      lowerText.includes("kuruluş")
-    ) {
-      botReply =
-        "Şirketimiz Corporate Governance olarak bilinir. Kurumsal yönetim danışmanlığı hizmeti sunmaktayız.";
     }
 
     if (
@@ -66,17 +70,17 @@ export const useChatBotStore = create<ChatBotState>((set) => ({
     }
 
     if (
-      lowerText.includes("yardım") ||
-      lowerText.includes("destek") ||
-      lowerText.includes("bilgi") ||
-      lowerText === "?" ||
-      lowerText === "yardim"
+      lowerText.includes("şirket") ||
+      lowerText.includes("şirket bilgi") ||
+      lowerText.includes("firma") ||
+      lowerText.includes("kuruluş")
     ) {
       botReply =
-        "Şu konularda bilgi verebilirim: şirket bilgileri, hizmetlerimiz, iletişim bilgileri. Size nasıl yardımcı olabilirim?";
+        "Şirketimiz Corporate Governance olarak bilinir. Kurumsal yönetim danışmanlığı hizmeti sunmaktayız.";
     }
 
     if (
+      lowerText.includes("iletişim bilgi") ||
       lowerText.includes("iletişim") ||
       lowerText.includes("telefon") ||
       lowerText.includes("mail") ||
@@ -98,6 +102,7 @@ export const useChatBotStore = create<ChatBotState>((set) => ({
 
     if (
       lowerText.includes("çalışma saatleri") ||
+      lowerText.includes("saat") ||
       lowerText.includes("ne zaman açıksınız") ||
       lowerText.includes("mesai")
     ) {

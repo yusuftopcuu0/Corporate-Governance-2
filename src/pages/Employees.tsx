@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import { useAuthStore } from "../store/useAuthStore";
 import { useEmployeeStore } from "../store/useEmployeeStore";
-import { Search, Add, Delete, Edit, FilterList } from "@mui/icons-material";
+import { Search, Delete, Edit, FilterList } from "@mui/icons-material";
 import { deepPurple, green, blue, orange, red } from "@mui/material/colors";
 
 const departmentColors: { [key: string]: string } = {
@@ -66,10 +66,8 @@ const EmployeeAvatar = ({ name }: { name: string }) => {
 
 export default function Employees() {
   const { role } = useAuthStore();
-  const { employees, addEmployee, removeEmployee } = useEmployeeStore();
+  const { employees, removeEmployee } = useEmployeeStore();
 
-  const [name, setName] = useState("");
-  const [department, setDepartment] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
 
@@ -89,19 +87,6 @@ export default function Employees() {
     }
     return matchesSearch && matchesDepartment;
   });
-
-  const handleAdd = () => {
-    if (name.trim() === "" || department.trim() === "") return;
-    addEmployee({
-      name,
-      role: "calisan",
-      department,
-      projects: 0,
-      tasks: 0,
-    });
-    setName("");
-    setDepartment("");
-  };
 
   const getDepartmentColor = (dept: string) => {
     return departmentColors[dept] || deepPurple[500];
@@ -123,23 +108,6 @@ export default function Employees() {
             Toplam {filteredEmployees.length} çalışan listeleniyor
           </Typography>
         </Box>
-        {role === "sahip" && (
-          <Button
-            variant="contained"
-            startIcon={<Add />}
-            onClick={handleAdd}
-            sx={{
-              borderRadius: 5,
-              px: 3,
-              py: 1,
-              textTransform: "none",
-              fontWeight: "bold",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-            }}
-          >
-            Yeni Çalışan Ekle
-          </Button>
-        )}
       </Box>
 
       {/* Filtreleme ve Arama */}
@@ -329,71 +297,6 @@ export default function Employees() {
           </Grid>
         ))}
       </Grid>
-
-      {/* Yeni Çalışan Ekleme Modalı (Sadece owner için) */}
-      {role === "sahip" && (
-        <Card sx={{ mt: 3, borderRadius: 3, boxShadow: 4, p: 3 }}>
-          <Typography variant="h6" fontWeight="bold" mb={2}>
-            Yeni Çalışan Ekle
-          </Typography>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item xs={12} md={4}>
-              <TextField
-                fullWidth
-                label="İsim Soyisim"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                variant="outlined"
-                size="small"
-                sx={{ borderRadius: 3 }}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <FormControl fullWidth size="small">
-                <InputLabel id="department-label">Departman</InputLabel>
-                <Select
-                  labelId="department-label"
-                  value={department}
-                  onChange={(e) => setDepartment(e.target.value)}
-                  label="Departman"
-                  sx={{ borderRadius: 3 }}
-                >
-                  {departments.map((dept) => (
-                    <MenuItem key={dept} value={dept}>
-                      {dept}
-                    </MenuItem>
-                  ))}
-                  <MenuItem value="">Yeni Departman Ekle</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            {department === "" && (
-              <Grid item xs={12} md={3}>
-                <TextField
-                  fullWidth
-                  label="Yeni Departman Adı"
-                  value={department}
-                  onChange={(e) => setDepartment(e.target.value)}
-                  variant="outlined"
-                  size="small"
-                  sx={{ borderRadius: 3 }}
-                />
-              </Grid>
-            )}
-            <Grid item xs={12} md={1}>
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={handleAdd}
-                disabled={!name.trim() || !department.trim()}
-                sx={{ borderRadius: 3, minWidth: "unset" }}
-              >
-                <Add />
-              </Button>
-            </Grid>
-          </Grid>
-        </Card>
-      )}
     </Box>
   );
 }
