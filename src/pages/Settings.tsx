@@ -134,12 +134,12 @@ const Settings = () => {
           <Card
             variant="outlined"
             sx={{
-              width: '100%',
-              maxWidth: '1200px',
-              mx: 'auto',
+              width: "100%",
+              maxWidth: "1200px",
+              mx: "auto",
               mt: { xs: 2, md: 0 },
               mb: 4,
-              backgroundColor: 'background.paper',
+              backgroundColor: "background.paper",
               boxShadow: 1,
               borderRadius: 2,
               overflow: "hidden",
@@ -316,32 +316,28 @@ const Settings = () => {
                   Renk Şeması
                 </Typography>
                 <Box display="flex" gap={2} flexWrap="wrap">
-                  {[
-                    "#1976d2",
-                    "#9c27b0",
-                    "#2e7d32",
-                    "#d32f2f",
-                    "#ed6c02",
-                  ].map((color) => (
-                    <Box
-                      key={color}
-                      sx={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: "50%",
-                        bgcolor: color,
-                        cursor: "pointer",
-                        border:
-                          currentTheme === color
-                            ? `3px solid ${theme.palette.primary.main}`
-                            : "none",
-                        "&:hover": {
-                          transform: "scale(1.1)",
-                          transition: "transform 0.2s",
-                        },
-                      }}
-                    />
-                  ))}
+                  {["#1976d2", "#9c27b0", "#2e7d32", "#d32f2f", "#ed6c02"].map(
+                    (color) => (
+                      <Box
+                        key={color}
+                        sx={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: "50%",
+                          bgcolor: color,
+                          cursor: "pointer",
+                          border:
+                            currentTheme === color
+                              ? `3px solid ${theme.palette.primary.main}`
+                              : "none",
+                          "&:hover": {
+                            transform: "scale(1.1)",
+                            transition: "transform 0.2s",
+                          },
+                        }}
+                      />
+                    )
+                  )}
                 </Box>
               </Box>
             </CardContent>
@@ -499,7 +495,10 @@ const Settings = () => {
           position: { xs: "static", md: "sticky" },
           top: 0,
           borderRight: { xs: "none", md: `1px solid ${theme.palette.divider}` },
-          borderBottom: { xs: `1px solid ${theme.palette.divider}`, md: "none" },
+          borderBottom: {
+            xs: `1px solid ${theme.palette.divider}`,
+            md: "none",
+          },
           p: 2,
           display: "flex",
           flexDirection: "column",
@@ -507,7 +506,7 @@ const Settings = () => {
           bgcolor: "background.paper",
         }}
       >
-        <Typography variant="h6" sx={{ mb: 3, pl: 2, fontWeight: 600 }}>
+        <Typography variant="h6" sx={{ pl: 2, fontWeight: 600 }}>
           Ayarlar
         </Typography>
 
@@ -538,7 +537,9 @@ const Settings = () => {
                   },
                 }}
               >
-                <ListItemIcon sx={{ minWidth: 40 }}>{section.icon}</ListItemIcon>
+                <ListItemIcon sx={{ minWidth: 40 }}>
+                  {section.icon}
+                </ListItemIcon>
                 <ListItemText
                   primary={section.label}
                   {...(section.textProps || {})}
@@ -554,9 +555,9 @@ const Settings = () => {
         sx={{
           flexGrow: 1,
           p: { xs: 2, md: 4 },
-          width: '100%',
-          maxWidth: { md: 'calc(100% - 280px)' },
-          mx: 'auto'
+          width: "100%",
+          maxWidth: { md: "calc(100% - 280px)" },
+          mx: "auto",
         }}
       >
         {/* Mobile Header */}
@@ -582,7 +583,9 @@ const Settings = () => {
           </FormControl>
         </Box>
 
-        <Box sx={{ width: '100%', maxWidth: 1200, mx: 'auto' }}>{renderSection()}</Box>
+        <Box sx={{ width: "100%", maxWidth: 1200, mx: "auto" }}>
+          {renderSection()}
+        </Box>
       </Box>
     </Box>
   );
