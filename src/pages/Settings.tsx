@@ -134,22 +134,33 @@ const Settings = () => {
           <Card
             variant="outlined"
             sx={{
-              height: "100vh",
-              backgroundColor: "#fff",
-              width: "1069px",
-              ml: -17,
-              mt: -4,
+              width: '100%',
+              maxWidth: '1200px',
+              mx: 'auto',
+              mt: { xs: 2, md: 0 },
+              mb: 4,
+              backgroundColor: 'background.paper',
+              boxShadow: 1,
+              borderRadius: 2,
+              overflow: "hidden",
             }}
           >
             <CardContent>
-              <Box display="flex" alignItems="center" mb={3}>
+              <Box
+                display="flex"
+                alignItems="center"
+                mb={3}
+                flexDirection={{ xs: "column", sm: "row" }}
+                textAlign={{ xs: "center", sm: "left" }}
+              >
                 <Avatar
                   sx={{
-                    width: 80,
-                    height: 80,
+                    width: { xs: 64, sm: 80 },
+                    height: { xs: 64, sm: 80 },
                     bgcolor: theme.palette.primary.main,
-                    fontSize: "2rem",
-                    mr: 2,
+                    fontSize: { xs: "1.5rem", sm: "2rem" },
+                    mr: { xs: 0, sm: 2 },
+                    mb: { xs: 2, sm: 0 },
                   }}
                 >
                   {name.charAt(0).toUpperCase()}
@@ -183,7 +194,7 @@ const Settings = () => {
                 </Alert>
               )}
 
-              <Grid container spacing={2}>
+              <Grid container spacing={2} sx={{ px: { xs: 1, sm: 2 } }}>
                 <Grid item xs={12} md={6}>
                   <TextField
                     fullWidth
@@ -271,11 +282,11 @@ const Settings = () => {
             variant="outlined"
             sx={{
               mb: 3,
-              height: "91vh",
+              height: "100%",
               backgroundColor: "#fff",
-              ml: -17,
-              width: "1069px",
-              mt: -4,
+              ml: 0,
+              width: "100%",
+              mt: 0,
             }}
           >
             <CardContent>
@@ -305,28 +316,32 @@ const Settings = () => {
                   Renk Şeması
                 </Typography>
                 <Box display="flex" gap={2} flexWrap="wrap">
-                  {["#1976d2", "#9c27b0", "#2e7d32", "#d32f2f", "#ed6c02"].map(
-                    (color) => (
-                      <Box
-                        key={color}
-                        sx={{
-                          width: 40,
-                          height: 40,
-                          borderRadius: "50%",
-                          bgcolor: color,
-                          cursor: "pointer",
-                          border:
-                            currentTheme === color
-                              ? `3px solid ${theme.palette.primary.main}`
-                              : "none",
-                          "&:hover": {
-                            transform: "scale(1.1)",
-                            transition: "transform 0.2s",
-                          },
-                        }}
-                      />
-                    )
-                  )}
+                  {[
+                    "#1976d2",
+                    "#9c27b0",
+                    "#2e7d32",
+                    "#d32f2f",
+                    "#ed6c02",
+                  ].map((color) => (
+                    <Box
+                      key={color}
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: "50%",
+                        bgcolor: color,
+                        cursor: "pointer",
+                        border:
+                          currentTheme === color
+                            ? `3px solid ${theme.palette.primary.main}`
+                            : "none",
+                        "&:hover": {
+                          transform: "scale(1.1)",
+                          transition: "transform 0.2s",
+                        },
+                      }}
+                    />
+                  ))}
                 </Box>
               </Box>
             </CardContent>
@@ -339,11 +354,11 @@ const Settings = () => {
             variant="outlined"
             sx={{
               mb: 3,
-              height: "91vh",
+              height: "100%",
               backgroundColor: "#fff",
-              ml: -17,
-              width: "1069px",
-              mt: -4,
+              ml: 0,
+              width: "100%",
+              mt: 0,
             }}
           >
             <CardContent>
@@ -390,11 +405,11 @@ const Settings = () => {
             variant="outlined"
             sx={{
               mb: 3,
-              height: "91vh",
+              height: "100%",
               backgroundColor: "#fff",
-              ml: -17,
-              width: "1069px",
-              mt: -4,
+              ml: 0,
+              width: "100%",
+              mt: 0,
             }}
           >
             <CardContent>
@@ -468,48 +483,70 @@ const Settings = () => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      {/* Sidebar */}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        minHeight: "100vh",
+        bgcolor: "background.default",
+      }}
+    >
       <Paper
         elevation={0}
         sx={{
-          width: 280,
-          flexShrink: 0,
-          borderRight: `1px solid ${theme.palette.divider}`,
-          display: { xs: "none", md: "block" },
+          width: { xs: "100%", md: 240 },
+          height: { xs: "auto", md: "100vh" },
+          position: { xs: "static", md: "sticky" },
+          top: 0,
+          borderRight: { xs: "none", md: `1px solid ${theme.palette.divider}` },
+          borderBottom: { xs: `1px solid ${theme.palette.divider}`, md: "none" },
           p: 2,
-          backgroundColor: "#fcfcfc",
-          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          zIndex: 10,
+          bgcolor: "background.paper",
         }}
       >
         <Typography variant="h6" sx={{ mb: 3, pl: 2, fontWeight: 600 }}>
           Ayarlar
         </Typography>
 
-        <List component="nav" sx={{ width: "100%" }}>
-          {SETTINGS_SECTIONS.map((section) => (
-            <ListItem
-              button
-              key={section.id}
-              selected={activeSection === section.id}
-              onClick={() => handleSectionClick(section.id)}
-              sx={{
-                borderRadius: 1,
-                mb: 0.5,
-                cursor: "pointer",
-                "&:hover": {
-                  backgroundColor: "action.hover",
-                },
-              }}
-            >
-              <ListItemIcon sx={{ minWidth: 40 }}>{section.icon}</ListItemIcon>
-              <ListItemText
-                primary={section.label}
-                {...(section.textProps || {})}
-              />
-            </ListItem>
-          ))}
-        </List>
+        <Box
+          sx={{
+            overflowY: "auto",
+            flex: 1,
+            mt: 2,
+            px: { xs: 1, sm: 2 },
+          }}
+        >
+          <List sx={{ width: "100%" }}>
+            {SETTINGS_SECTIONS.map((section) => (
+              <ListItem
+                button
+                key={section.id}
+                selected={activeSection === section.id}
+                onClick={() => handleSectionClick(section.id)}
+                sx={{
+                  borderRadius: 1,
+                  mb: 0.5,
+                  px: { xs: 1, sm: 2 },
+                  "&.Mui-selected": {
+                    backgroundColor: "action.selected",
+                    "&:hover": {
+                      backgroundColor: "action.selected",
+                    },
+                  },
+                }}
+              >
+                <ListItemIcon sx={{ minWidth: 40 }}>{section.icon}</ListItemIcon>
+                <ListItemText
+                  primary={section.label}
+                  {...(section.textProps || {})}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
       </Paper>
 
       {/* Main Content */}
@@ -517,7 +554,9 @@ const Settings = () => {
         sx={{
           flexGrow: 1,
           p: { xs: 2, md: 4 },
-          maxWidth: "calc(100% - 280px)",
+          width: '100%',
+          maxWidth: { md: 'calc(100% - 280px)' },
+          mx: 'auto'
         }}
       >
         {/* Mobile Header */}
@@ -543,7 +582,7 @@ const Settings = () => {
           </FormControl>
         </Box>
 
-        <Box sx={{ maxWidth: 800, mx: "auto" }}>{renderSection()}</Box>
+        <Box sx={{ width: '100%', maxWidth: 1200, mx: 'auto' }}>{renderSection()}</Box>
       </Box>
     </Box>
   );
