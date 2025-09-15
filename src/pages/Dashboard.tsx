@@ -149,12 +149,12 @@ const Dashboard = () => {
               day: "numeric",
             })}
           </Typography>
-        </Box>
-        <Box display="flex" alignItems="center" sx={{ ml: "690px" }}>
-          <TrendingUp color="success" sx={{ mr: 1 }} />
-          <Typography variant="body1" color="success.main">
-            Genel Performans: +8.2%
-          </Typography>
+          <Box display="flex" alignItems="center" sx={{ mt: "5px" }}>
+            <TrendingUp color="success" sx={{ mr: 1 }} />
+            <Typography variant="body1" color="success.main">
+              Genel Performans: +8.2%
+            </Typography>
+          </Box>
         </Box>
       </Box>
 
