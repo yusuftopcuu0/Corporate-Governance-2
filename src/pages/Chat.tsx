@@ -91,18 +91,13 @@ const Chat = () => {
   // Kullanıcı listesi rol bazlı
   const users = useMemo(() => {
     if (role === "sahip") {
-      return [
-        ...new Set([...employees.map((e) => e.name), "Tüm Kullanıcılar"]),
-      ];
+      return [...new Set(employees.map((e) => e.name))];
     } else if (role === "yonetici") {
       return [
-        ...new Set([
-          ...employees.filter((e) => e.department === "IT").map((e) => e.name),
-          "Tüm Kullanıcılar",
-        ]),
+        ...new Set(employees.filter((e) => e.department === "IT").map((e) => e.name))
       ];
     }
-    return [...new Set([...employees.map((e) => e.name), "Tüm Kullanıcılar"])];
+    return [...new Set(employees.map((e) => e.name))];
   }, [role, employees]);
 
   // Chat kısmında başlangıçta, solda en üstteki kişi görünür
@@ -136,19 +131,9 @@ const Chat = () => {
   const handleSend = () => {
     if (!input.trim() || !selectedUser || !role) return;
 
-    // Eğer "Tüm Kullanıcılar" seçiliyse, tüm kullanıcılara gönder
-    if (selectedUser === "Tüm Kullanıcılar") {
-      const recipients = users.filter(
-        (u) => u !== "Tüm Kullanıcılar" && u !== userName
-      );
-      recipients.forEach((recipient) => {
-        addMessage(userName, recipient, input);
-      });
-    } else {
+      // Seçili kullanıcıya mesaj gönder
       addMessage(userName, selectedUser, input);
-    }
-
-    setInput("");
+      setInput("");
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -161,9 +146,7 @@ const Chat = () => {
   const filteredMessages = messages.filter(
     (msg) =>
       (msg.sender === selectedUser && msg.receiver === userName) ||
-      (msg.sender === userName && msg.receiver === selectedUser) ||
-      (selectedUser === "Tüm Kullanıcılar" &&
-        (msg.receiver === "Tüm Kullanıcılar" || msg.sender === userName))
+      (msg.sender === userName && msg.receiver === selectedUser)
   );
 
   const getLastMessage = (user: string) => {
@@ -175,10 +158,8 @@ const Chat = () => {
     return userMessages[userMessages.length - 1];
   };
 
-  const filteredUsers = users.filter(
-    (user) =>
-      user.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user === "Tüm Kullanıcılar"
+  const filteredUsers = users.filter((user) =>
+    user.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Okunmamış mesaj sayıları
