@@ -487,68 +487,76 @@ const Settings = () => {
         bgcolor: "background.default",
       }}
     >
-      <Paper
-        elevation={0}
-        sx={{
-          width: { xs: "100%", md: 240 },
-          height: { xs: "auto", md: "100vh" },
-          position: { xs: "static", md: "sticky" },
-          top: 0,
-          borderRight: { xs: "none", md: `1px solid ${theme.palette.divider}` },
-          borderBottom: {
-            xs: `1px solid ${theme.palette.divider}`,
-            md: "none",
-          },
-          p: 2,
-          display: "flex",
-          flexDirection: "column",
-          zIndex: 10,
-          bgcolor: "background.paper",
-        }}
-      >
-        <Typography variant="h6" sx={{ pl: 2, fontWeight: 600 }}>
-          Ayarlar
-        </Typography>
-
-        <Box
+      {/* Sidebar Menu - Hidden on mobile, visible on md and up */}
+      <Box sx={{ display: { xs: "none", md: "block" } }}>
+        <Paper
+          elevation={0}
           sx={{
-            overflowY: "auto",
-            flex: 1,
-            mt: 2,
-            px: { xs: 1, sm: 2 },
+            width: 240,
+            height: "340px",
+            position: "sticky",
+            top: 0,
+            borderRight: `1px solid ${theme.palette.divider}`,
+            borderLeft: `1px solid ${theme.palette.divider}`,
+            borderTop: `1px solid ${theme.palette.divider}`,
+            p: 1,
+            mt: 4,
+            ml: 1,
+            display: "flex",
+            flexDirection: "column",
+            zIndex: 10,
+            bgcolor: "background.paper",
+            boxShadow: "1px 1px 1px rgba(0, 0, 0, 0.26)",
           }}
         >
-          <List sx={{ width: "100%" }}>
-            {SETTINGS_SECTIONS.map((section) => (
-              <ListItem
-                button
-                key={section.id}
-                selected={activeSection === section.id}
-                onClick={() => handleSectionClick(section.id)}
-                sx={{
-                  borderRadius: 1,
-                  mb: 0.5,
-                  px: { xs: 1, sm: 2 },
-                  "&.Mui-selected": {
-                    backgroundColor: "action.selected",
-                    "&:hover": {
+          <Typography
+            variant="h6"
+            sx={{ pl: 2, fontWeight: 600, textAlign: "center", pb: 1 }}
+          >
+            Ayarlar
+          </Typography>
+
+          <hr />
+
+          <Box
+            sx={{
+              overflowY: "auto",
+              flex: 1,
+              px: { xs: 1, sm: 2 },
+            }}
+          >
+            <List sx={{ width: "100%" }}>
+              {SETTINGS_SECTIONS.map((section) => (
+                <ListItem
+                  button
+                  key={section.id}
+                  selected={activeSection === section.id}
+                  onClick={() => handleSectionClick(section.id)}
+                  sx={{
+                    borderRadius: 1,
+                    mb: 0.5,
+                    px: { xs: 1, sm: 2 },
+                    "&.Mui-selected": {
                       backgroundColor: "action.selected",
+                      "&:hover": {
+                        backgroundColor: "action.selected",
+                      },
                     },
-                  },
-                }}
-              >
-                <ListItemIcon sx={{ minWidth: 40 }}>
-                  {section.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={section.label}
-                  {...(section.textProps || {})}
-                />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </Paper>
+                  }}
+                >
+                  <ListItemIcon sx={{ minWidth: 40 }}>
+                    {section.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={section.label}
+                    {...(section.textProps || {})}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Paper>
+      </Box>
 
       {/* Main Content */}
       <Box

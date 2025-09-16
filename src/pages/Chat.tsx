@@ -94,7 +94,9 @@ const Chat = () => {
       return [...new Set(employees.map((e) => e.name))];
     } else if (role === "yonetici") {
       return [
-        ...new Set(employees.filter((e) => e.department === "IT").map((e) => e.name))
+        ...new Set(
+          employees.filter((e) => e.department === "IT").map((e) => e.name)
+        ),
       ];
     }
     return [...new Set(employees.map((e) => e.name))];
@@ -131,9 +133,9 @@ const Chat = () => {
   const handleSend = () => {
     if (!input.trim() || !selectedUser || !role) return;
 
-      // Seçili kullanıcıya mesaj gönder
-      addMessage(userName, selectedUser, input);
-      setInput("");
+    // Seçili kullanıcıya mesaj gönder
+    addMessage(userName, selectedUser, input);
+    setInput("");
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
