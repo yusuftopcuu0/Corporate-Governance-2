@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -62,7 +62,7 @@ const SETTINGS_SECTIONS = [
 
 const Settings = () => {
   const theme = useTheme();
-  const { logout } = useAuthStore();
+  const { logout, user } = useAuthStore();
   const {
     theme: currentTheme,
     language,
@@ -75,7 +75,10 @@ const Settings = () => {
 
   const [activeSection, setActiveSection] = useState("profile");
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({ name, email });
+  // Display values prefer authenticated user if present
+  const displayedName = user?.fullName ?? name;
+  const displayedEmail = user?.email ?? email;
+  const [formData, setFormData] = useState({ name: displayedName, email: displayedEmail });
   const [notifications, setNotifications] = useState({
     email: true,
     push: true,
@@ -84,6 +87,11 @@ const Settings = () => {
   const [saveStatus, setSaveStatus] = useState<
     "idle" | "saving" | "success" | "error"
   >("idle");
+
+  // Keep form in sync when the authenticated user or settings change
+  useEffect(() => {
+    setFormData({ name: displayedName, email: displayedEmail });
+  }, [displayedName, displayedEmail]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -163,12 +171,12 @@ const Settings = () => {
                     mb: { xs: 2, sm: 0 },
                   }}
                 >
-                  {name.charAt(0).toUpperCase()}
+                  {(displayedName?.charAt(0) || "?").toUpperCase()}
                 </Avatar>
                 <Box>
-                  <Typography variant="h6">{name}</Typography>
+                  <Typography variant="h6">{displayedName}</Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {email}
+                    {displayedEmail}
                   </Typography>
                   <Chip
                     label="Premium Üye"
@@ -241,7 +249,7 @@ const Settings = () => {
                       variant="outlined"
                       onClick={() => {
                         setIsEditing(false);
-                        setFormData({ name, email });
+                        setFormData({ name: displayedName, email: displayedEmail });
                       }}
                       sx={{ mr: 1 }}
                     >
@@ -534,6 +542,7 @@ const Settings = () => {
                   onClick={() => handleSectionClick(section.id)}
                   sx={{
                     borderRadius: 1,
+                    cursor: "pointer",
                     mb: 0.5,
                     px: { xs: 1, sm: 2 },
                     "&.Mui-selected": {
