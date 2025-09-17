@@ -158,7 +158,7 @@ const Dashboard = () => {
         </Box>
       </Box>
 
-      <Grid sx={{ width: "80vw" }}>
+      <Grid sx={{ width: "100%" }}>
         {/* Üstte istatistik kartları */}
         <Grid container spacing={3}>
           {stats.map((stat) => (
