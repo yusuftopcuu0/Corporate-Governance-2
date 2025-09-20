@@ -84,6 +84,9 @@ function Login() {
               onChange={(e) => setUsername(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && handleLogin()}
             />
+            <Typography variant="body2" align="center" color="text.secondary">
+              "ornekkullanici" olarak giriş yapabilirsiniz
+            </Typography>
             <Button
               type="button"
               fullWidth

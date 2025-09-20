@@ -86,7 +86,7 @@ const TaskAvatar = ({ name }: { name: string }) => {
 
 export default function Tasks() {
   const { role } = useAuthStore();
-  const { tasks, addTask, updateTask, removeTask } = useTaskStore();
+  const { tasks, updateTask, removeTask } = useTaskStore();
 
   const [title, setTitle] = useState("");
   const [assignedTo, setAssignedTo] = useState("");

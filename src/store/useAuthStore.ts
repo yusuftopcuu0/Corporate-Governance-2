@@ -90,6 +90,12 @@ const PREDEFINED_USERS: User[] = [
     fullName: "Sema Duman",
     email: "sema12@gmail.com",
   },
+  {
+    username: "ornekkullanici",
+    role: "calisan",
+    fullName: "Ornek Kullanıcı",
+    email: "ornekkullanici@gmail.com",
+  },
 ];
 
 interface AuthState {
